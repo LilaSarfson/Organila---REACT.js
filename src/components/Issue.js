@@ -7,6 +7,17 @@ function Issue (props){
     const [description, setDescription]=useState('');
     const [issue, setIssue]= useState([]);
     const [active, setActive]=useState(false)
+
+    const getName= (e) =>{
+        setName(e.target.value);
+    }
+    const getDescription= (e) =>{
+        setDescription(e.target.value);
+    }
+    const handleClick=(e)=>{
+        e.preventDefault();
+        console.log(name);
+    }
     return(
         <div>
             {
@@ -21,17 +32,21 @@ function Issue (props){
             <div className='issue-container-form'>
                 <form>
                 <label for="issue">Issue:</label>
-                <input 
+                <input onChange={getName}
                  type="text" id="issue" name="newIssue"/> <br/>
+
                  <label for="description">Description:</label>
-                <textarea rows="6" cols="40"
+                <textarea onChange={getDescription}
+                rows="6" cols="40"
                   id="issue-description" name="newIssueDescription"/>
+
                 <label for="user">who?</label>
                 <select id="user" name="user">
-                    <option value='Carlos'>Carlos</option>
-                    <option value='Lila'>Lila</option>
+                    <option value=''>{props.who}</option>
+                    <option value=''>{props.who}</option>
                 </select><br/>
-                <input
+
+                <input onClick={handleClick}
                 value="submit form"
                 type='button' />
                 </form>
