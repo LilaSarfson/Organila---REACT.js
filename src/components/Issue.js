@@ -40,6 +40,10 @@ function Issue (props){
                 rows="6" cols="40"
                   id="issue-description" name="newIssueDescription"/>
 
+
+                {/* Quien tiene que manejar la informacion del encargado de hace una taaria    
+                https://es.stackoverflow.com/questions/466976/enviar-datos-de-componente-hijo-a-padre-react-js
+                */}
                 <label for="user">who?</label>
                 <select id="user" name="user">
                     <option value=''>{props.who}</option>
