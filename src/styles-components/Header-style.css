@@ -4,6 +4,12 @@
 }
 .header-users{
 width: 300px;
+display: flex;
+flex-direction: column;
+gap: 1rem;
+position: absolute;
+top: 15px;
+left: 50px;
 }
 .header-title{
     display: flex;
@@ -24,4 +30,10 @@ width: 300px;
     width: 70px;
     height: 70px;
     border: solid black 1px;
+}
+.all-users{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    gap: 2rem;
 }

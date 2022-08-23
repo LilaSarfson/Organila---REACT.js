@@ -2,20 +2,20 @@ import React, { useState } from "react";
 import "../styles-components/Header-style.css"
 import User from "./User"
 function Header (){
-    /* const [value, setValue] = useState(false); */
     const [name, setName]=useState('');
-    const [user, setUser]=useState([])
+    const [user, setUser]=useState([]);
     const handleChange = (e) =>{
         setName(e.target.value);
     }
     const handleClick= (e)=>{
+        e.preventDefault();
         let newUser = {
-            id: user.length,
+            id: user.length + 1,
             name:name
            }
+           if(name!==''){
         setUser((user)=> [...user, newUser])
-        e.preventDefault();
-        console.log(user)
+            }
     }
     return(
         <div className="main-header">
@@ -31,6 +31,7 @@ function Header (){
                 <h3>¿A quién le toca?</h3>
                 <form>
                 <label for="user">Add user</label>
+                <br/>
                 <input 
                 onChange={handleChange}
                  type="text" id="user" name="newUser"/>
@@ -39,9 +40,9 @@ function Header (){
                 value="submit form"
                 type='button' />
                 </form>
-                {user.map((usuario) =>  <User name={usuario.name} id={usuario.id} key={user.length}/>)}
-                <button onClick={()=>{
-                }}>+</button>
+                <div className="all-users">
+                    {user.map((usuario) =>  <User name={usuario.name} id={usuario.id} key={user.id}/>)}
+                </div>
             </div>
 
         </div>
