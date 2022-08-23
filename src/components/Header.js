@@ -2,22 +2,21 @@ import React, { useState } from "react";
 import "../styles-components/Header-style.css"
 import User from "./User"
 function Header (){
-    const [name, setName] = useState('');
+    /* const [value, setValue] = useState(false); */
+    const [name, setName]=useState('');
     const [user, setUser]=useState([])
-    const inputValue = (input) =>{
-    console.log(user)
+    const handleChange = (e) =>{
+        setName(e.target.value);
     }
-    // const userList = [{
-    //     id:1,
-    //     name:'Lila',
-    // },{
-    //     id:2,
-    //     name:'Carlos',
-    // },{
-    //     id:3,
-    //     name:'Noa',
-    
-    // }];
+    const handleClick= (e)=>{
+        let newUser = {
+            id: user.length,
+            name:name
+           }
+        setUser((user)=> [...user, newUser])
+        e.preventDefault();
+        console.log(user)
+    }
     return(
         <div className="main-header">
              <div className="header-title">
@@ -33,27 +32,15 @@ function Header (){
                 <form>
                 <label for="user">Add user</label>
                 <input 
-
-                // cambiar algo aqui, el evento lo tiene que capturar este input pero lo tiene que enviar el de abajo
-                onSubmit={(e)=>{
-                    let value = e.target.value;
-                    let newUser = {
-                        id: user.length,
-                        name:value
-                    }
-                    setUser((user) => [...user, newUser])
-                }}
+                onChange={handleChange}
                  type="text" id="user" name="newUser"/>
                 <input
+                onClick={handleClick}
                 value="submit form"
-                onClick={inputValue}
                 type='button' />
                 </form>
-                {user.map((usuario) =>  <User name={usuario.name} id={usuario.id} key={usuario}/>)}
+                {user.map((usuario) =>  <User name={usuario.name} id={usuario.id} key={user.length}/>)}
                 <button onClick={()=>{
-                    // userList.push((userList.length)+1)
-                    // console.log(userList)
-                    // console.log(userList.length)
                 }}>+</button>
             </div>
 
