@@ -6,7 +6,8 @@ function App() {
   return (
     <div className="App">
      <Header/>
-    </div>
+     <TodoBox/>    
+     </div>
   );
 }
 export default App;
