@@ -1,4 +1,4 @@
-import { toHaveDescription } from '@testing-library/jest-dom/dist/matchers';
+
 import { useState } from 'react';
 import '../styles-components/TodoBox-style.css'
 
@@ -16,12 +16,18 @@ function Issue (props){
     }
     const handleClick=(e)=>{
         e.preventDefault();
-        console.log(name);
+        let newIssue = {
+            name:name,
+            description:description, 
+        }
+        setIssue((issue)=>[...issue, newIssue])
+        console.log(issue);
+        setActive(false);
     }
     return(
         <div>
             {
-                issue && !active?
+                issue.length===0 && !active?
             <div className='issue-container add-issue'>
                 <p>Upps, you don't have any issue yet!</p>
                 <button onClick={()=>{
@@ -57,7 +63,8 @@ function Issue (props){
             </div>
             :
             <div className='issue-container'>
-            <p></p>
+            <p>{issue.name}</p>
+            <p>{issue.description}</p>
         </div>
             }
         </div>

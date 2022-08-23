@@ -9,8 +9,8 @@
     justify-content: center;
 }
 .box{
-    width: 400px;
-    height: 700px;
+    width: 30vw;
+    height: 80vh;
     border: solid black 2px;
     text-align: center;
 }
