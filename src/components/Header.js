@@ -4,6 +4,12 @@ import User from "./User"
 function Header ({user, setUser}){
     const [name, setName]=useState('');
     const [color, setColor]=useState('');
+    const createBackground = ()=>{
+        let randoNumber= getRandomInt(3);
+        console.log(randoNumber)
+        let colorsArray = ["#FCF8E8","#94B49F","#DF7861","#76549A"];
+        setColor(colorsArray[randoNumber]);
+    }
     const getRandomInt = (max) =>{
         return Math.floor(Math.random() * max)
     }
@@ -14,17 +20,13 @@ function Header ({user, setUser}){
         e.preventDefault();
         let newUser =  {
             id: user.length + 1,
-            name:name
+            name:name,
+            color:color
            }
-           if(name!==''){
+           if(name!=='' && user.length !== 4){
         setUser((user)=> [...user, newUser])
             }
-
-            // Intento de poner random el backgroundcolor del user
-        let randoNumber= getRandomInt(3);
-        console.log(randoNumber)
-        let colorsArray = ["#FCF8E8","#94B49F","#DF7861","#76549A"];
-        setColor(colorsArray[randoNumber]);
+            createBackground();
     }
     return(
         <div className="main-header">
@@ -50,7 +52,7 @@ function Header ({user, setUser}){
                 type='button' />
                 </form>
                 <div className="all-users">
-                    {user.map((usuario) =>  <User style={{backgroundColor: color}} key={usuario.id} size={"normal"} name={usuario.name} id={usuario.id}/>)}
+                    {user.map((usuario) =>  <User color={usuario.color} key={usuario.id} size={"normal"} name={usuario.name} id={usuario.id}/>)}
                 </div>
             </div>
 

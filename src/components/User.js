@@ -1,4 +1,5 @@
 import "../styles-components/Header-style.css"
+
 function User (props){
     let className ="";
     if (props.size === "normal"){
@@ -8,7 +9,7 @@ function User (props){
         className = "small-user-box"
     }
     return(
-        <div className={className} >
+        <div style={{backgroundColor: (props.color)}} className={className} >
             <p>{props.name}</p>
             <p>{props.id}</p>
         </div>  
