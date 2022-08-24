@@ -78,6 +78,8 @@ function Issue (props){
                 <div key={issue.length + 1} className='issue-container'>
                     <h3 className='issue-title'>{issue.name}</h3>
                     <p>{issue.description}</p>
+
+                    {/* Esto del user.name no funciona */}
                     <User name={(props.user).name} size={"small"}/>
 
                 </div>)}
