@@ -6,7 +6,7 @@ function TodoBox(props){
         <div className='box-container'>
            <div className='box toDo'>
             <h2>To Do</h2>
-            <Issue who={props.who}/>
+            <Issue user={props.user}/>
             </div>
            <div className='box'><h2>In progress</h2></div>
            <div className='box'><h2>Done</h2></div>

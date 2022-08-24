@@ -53,8 +53,9 @@ function Issue (props){
                 */}
                 <label for="user">who?</label>
                 <select id="user" name="user">
-                    <option value=''>{props.who}</option>
-                    <option value=''>{props.who}</option>
+                    {props.user.map((user) =>
+                    <option key={user.id} value=''>{user.name}</option>)
+                    }
                 </select><br/>
 
                 <input onClick={handleClick}
@@ -77,7 +78,7 @@ function Issue (props){
                 <div key={issue.length + 1} className='issue-container'>
                     <h3 className='issue-title'>{issue.name}</h3>
                     <p>{issue.description}</p>
-                    <User size={"small"}/>
+                    <User name={(props.user).name} size={"small"}/>
 
                 </div>)}
             </div>

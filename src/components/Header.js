@@ -3,6 +3,10 @@ import "../styles-components/Header-style.css"
 import User from "./User"
 function Header ({user, setUser}){
     const [name, setName]=useState('');
+    const [color, setColor]=useState('');
+    const getRandomInt = (max) =>{
+        return Math.floor(Math.random() * max)
+    }
     const handleChange = (e) =>{
         setName(e.target.value);
     }
@@ -15,6 +19,12 @@ function Header ({user, setUser}){
            if(name!==''){
         setUser((user)=> [...user, newUser])
             }
+
+            // Intento de poner random el backgroundcolor del user
+        let randoNumber= getRandomInt(3);
+        console.log(randoNumber)
+        let colorsArray = ["#FCF8E8","#94B49F","#DF7861","#76549A"];
+        setColor(colorsArray[randoNumber]);
     }
     return(
         <div className="main-header">
@@ -40,7 +50,7 @@ function Header ({user, setUser}){
                 type='button' />
                 </form>
                 <div className="all-users">
-                    {user.map((usuario) =>  <User size={"normal"} name={usuario.name} id={usuario.id} key={user.id}/>)}
+                    {user.map((usuario) =>  <User style={{backgroundColor: color}} key={usuario.id} size={"normal"} name={usuario.name} id={usuario.id}/>)}
                 </div>
             </div>
 

@@ -20,7 +20,7 @@ if (user.length === 0){
         setUser={setUser}
         />
         <TodoBox
-        who={user.name}
+        user={user}
         />
       </div>  
      </div>

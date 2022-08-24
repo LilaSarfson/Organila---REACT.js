@@ -7,7 +7,6 @@ function User (props){
     else if (props.size === "small"){
         className = "small-user-box"
     }
-
     return(
         <div className={className} >
             <p>{props.name}</p>
