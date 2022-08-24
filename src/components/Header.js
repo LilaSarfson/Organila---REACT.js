@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import "../styles-components/Header-style.css"
 import User from "./User"
 function Header ({name, setName}){
-    // const [name, setName]=useState('');
     const [user, setUser]=useState([]);
     const handleChange = (e) =>{
         setName(e.target.value);
     }
     const handleClick= (e)=>{
         e.preventDefault();
-        let newUser = {
+        let newUser =  {
             id: user.length + 1,
             name:name
            }
@@ -41,7 +40,7 @@ function Header ({name, setName}){
                 type='button' />
                 </form>
                 <div className="all-users">
-                    {user.map((usuario) =>  <User name={usuario.name} id={usuario.id} key={user.id}/>)}
+                    {user.map((usuario) =>  <User size={"normal"} name={usuario.name} id={usuario.id} key={user.id}/>)}
                 </div>
             </div>
 
@@ -50,5 +49,3 @@ function Header ({name, setName}){
 
 }
 export default Header;
-
-// Para re-renderizar el un componente tengo que usar el estado, entonces, tengo que sustituir el array chungo por el estado.

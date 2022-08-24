@@ -32,3 +32,12 @@ h2{
     border: solid red 2px;
     margin: 0 auto;
 }
+.main-issues{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.issue-title{
+    text-transform: uppercase;
+    background-color: rgba(255, 68, 0, 0.523);
+}

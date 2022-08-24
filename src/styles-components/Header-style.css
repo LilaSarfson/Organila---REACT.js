@@ -31,6 +31,11 @@ left: 50px;
     height: 70px;
     border: solid black 1px;
 }
+.small-user-box{
+    width: 20px;
+    height: 20px;
+    border: solid black 1px;
+}
 .all-users{
     display: flex;
     width: 100%;

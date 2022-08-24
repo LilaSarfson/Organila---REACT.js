@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import '../styles-components/TodoBox-style.css'
+import User from "./User"
 
 function Issue (props){
     const [name, setName]= useState('');
@@ -21,20 +22,20 @@ function Issue (props){
             description:description, 
         }
         setIssue((issue)=>[...issue, newIssue])
-        console.log(issue);
+        console.log(active);
         setActive(false);
     }
     return(
         <div>
             {
-                issue.length===0 && !active?
+               issue.length===0 && !active ?
             <div className='issue-container add-issue'>
                 <p>Upps, you don't have any issue yet!</p>
                 <button onClick={()=>{
                     setActive(true)
                 }}> Add an issue </button>
             </div>
-            : active ?
+            : active?
             <div className='issue-container-form'>
                 <form>
                 <label for="issue">Issue:</label>
@@ -62,13 +63,27 @@ function Issue (props){
                 </form>
             </div>
             :
-            <div className='issue-container'>
-            <p>{issue.name}</p>
-            <p>{issue.description}</p>
-        </div>
+            ''
             }
+            <div className="main-issues">
+                { issue.length===0 ?
+                ''
+                :
+                <button onClick={() =>{
+                    setActive(true)
+                }}>Add a new issue</button>
+                }
+                {issue.map((issue) =>
+                <div key={issue.length + 1} className='issue-container'>
+                    <h3 className='issue-title'>{issue.name}</h3>
+                    <p>{issue.description}</p>
+                    <User size={"small"}/>
+
+                </div>)}
+            </div>
+
+            
         </div>
-            )
-}
+)};
 
 export default Issue;
