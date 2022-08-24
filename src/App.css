@@ -2,3 +2,13 @@
    width: 100vw;
    font-family: 'Merriweather', serif; 
 }
+.main-app{
+   display: flex;
+   flex-direction: column;
+   gap:1rem;
+}
+.main-app-users{
+   display: flex;
+   flex-direction: column;
+   gap:6rem;
+}

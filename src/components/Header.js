@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "../styles-components/Header-style.css"
 import User from "./User"
-function Header ({name, setName}){
-    const [user, setUser]=useState([]);
+function Header ({user, setUser}){
+    const [name, setName]=useState('');
     const handleChange = (e) =>{
         setName(e.target.value);
     }

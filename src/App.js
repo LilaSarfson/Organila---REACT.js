@@ -5,17 +5,24 @@ import React, { useState } from "react";
 
 
 function App() {
-const [name, setName]=useState('');
-
+const [user, setUser]=useState([]);
+let classNameApp=""
+if (user.length === 0){
+  classNameApp = "main-app"
+}else{
+  classNameApp = "main-app-users"
+}
   return (
     <div className="App">
-     <Header 
-     name={name}
-     setName={setName}
-     />
-     <TodoBox
-     who={name}
-     />    
+      <div className={classNameApp}>
+        <Header
+        user={user}
+        setUser={setUser}
+        />
+        <TodoBox
+        who={user.name}
+        />
+      </div>  
      </div>
   );
 }
