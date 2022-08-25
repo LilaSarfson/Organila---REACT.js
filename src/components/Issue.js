@@ -8,6 +8,7 @@ function Issue (props){
     const [description, setDescription]=useState('');
     const [issue, setIssue]= useState([]);
     const [active, setActive]=useState(false)
+    const [position, setPosition]=useState(0);
 
     const getName= (e) =>{
         setName(e.target.value);
@@ -20,10 +21,14 @@ function Issue (props){
             setActive(false)
         }
     }
-    const deleteIssue = (e)=>{
-        // Hacer un filtro mirando el indice que coincide con el target y quedarse con todos menos ese
-        let issueToDelete = (e.target.value)
-        console.log(issueToDelete)
+    const deleteIssue = (idd)=>{
+       let newIssuesArray = issue.filter((issue) => issue.id != idd );
+       setIssue(newIssuesArray);
+    }
+    const editIssue = (id) =>{
+        setActive(true);
+        setPosition(id)
+        console.log(position);
     }
     const handleClick=(e)=>{
         e.preventDefault();
@@ -32,10 +37,12 @@ function Issue (props){
             description:description, 
             id:issue.length
         }
+        if(newIssue.name  != ''){
         setIssue((issue)=>[...issue, newIssue])
-        console.log(active);
         setActive(false);
-    }
+        }
+        else{
+            alert('your issue needs a name')}}
     return(
         <div>
             {
@@ -54,11 +61,11 @@ function Issue (props){
                 src='cross.png' alt='cross' onClick={closeForm}></img>
                 <label for="issue">Issue</label>
                 <input className='issue-input' onChange={getName}
-                 type="text" id="issue" name="newIssue"/> <br/>
+                 type="text" id="issue" name="newIssue" value={issue ?  issue[position].name : undefined} required/> <br/>
             <div className='descWho-container'>   
                 <section>           
                     <label for="description">Description</label><br/>
-                    <textarea onChange={getDescription}
+                    <textarea required onChange={getDescription}
                     rows="6" cols="20"
                     id="issue-description" 
                     name="newIssueDescription"/>
@@ -85,23 +92,27 @@ function Issue (props){
             <div className="main-issues">
                 { issue.length===0 || active ?
                 ''
+                : issue.length < 0 && active?
+                <p>Hola</p>
                 :
                 <button className='add-issue' onClick={() =>{
                     setActive(true)
                 }}>Add a new issue</button>
                 }
                 {issue.map((issue) =>
-                <div key={issue.length + 1} className='issue-container'>
+                <div key={issue.id} className='issue-container'>
                     <h3 className='issue-title'>{issue.name}</h3>
                     <p>{issue.description}</p>
                     <div>
-                        <img onClick={deleteIssue} style={{width: '7%'}} src='eliminar.png' alt='eliminar'></img>
-                        <img style={{width: '7%'}} src='editar.png' alt='eliminar'></img>
+                        <img onClick={()=>deleteIssue(issue.id)} style={{width: '7%'}} src='eliminar.png' alt='eliminar'></img>
+                        <img onClick={()=>editIssue(issue.id)} style={{width: '7%'}} src='editar.png' alt='eliminar'></img>
 
                     </div>
                     <User name={(props.user).name} size={"small"}/>
 
-                </div>)}
+                </div>)
+                
+                }
             </div>
 
             
