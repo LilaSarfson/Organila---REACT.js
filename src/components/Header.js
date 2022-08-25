@@ -39,16 +39,16 @@ function Header ({user, setUser}){
             </div>
 
             <div className="header-users">
-                <h3>¿A quién le toca?</h3>
+                <h3 style={{margin: 0}}>¿A quién le toca?</h3>
+                <h4 style={{margin: 0}}>Add user</h4>
                 <form>
-                <label for="user">Add user</label>
                 <br/>
-                <input 
+                <input className="input-user"
                 onChange={handleChange}
                  type="text" id="user" name="newUser"/>
-                <input
+                <input className="add-user"
                 onClick={handleClick}
-                value="submit form"
+                value="Acept"
                 type='button' />
                 </form>
                 <div className="all-users">

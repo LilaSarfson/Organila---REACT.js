@@ -11,7 +11,6 @@ function User (props){
     return(
         <div style={{backgroundColor: (props.color)}} className={className} >
             <p>{props.name}</p>
-            <p>{props.id}</p>
         </div>  
     )
 }

@@ -29,22 +29,23 @@ function Issue (props){
         <div>
             {
                issue.length===0 && !active ?
-            <div className='issue-container add-issue'>
+            <div className='issue-container'>
                 <p>Upps, you don't have any issue yet!</p>
-                <button onClick={()=>{
+                <button className='add-issue'
+                onClick={()=>{
                     setActive(true)
                 }}> Add an issue </button>
             </div>
             : active?
             <div className='issue-container-form'>
-                <form>
-                <label for="issue">Issue:</label>
-                <input onChange={getName}
+                <form className = 'newIssue-form'>
+                <label for="issue">Issue</label>
+                <input className='issue-input' onChange={getName}
                  type="text" id="issue" name="newIssue"/> <br/>
 
-                 <label for="description">Description:</label>
+                 <label for="description">Description</label>
                 <textarea onChange={getDescription}
-                rows="6" cols="40"
+                rows="6" cols="20"
                   id="issue-description" name="newIssueDescription"/>
 
 
@@ -59,6 +60,7 @@ function Issue (props){
                 </select><br/>
 
                 <input onClick={handleClick}
+                className='add-issue'
                 value="submit form"
                 type='button' />
                 </form>
@@ -70,7 +72,7 @@ function Issue (props){
                 { issue.length===0 ?
                 ''
                 :
-                <button onClick={() =>{
+                <button className='add-issue' onClick={() =>{
                     setActive(true)
                 }}>Add a new issue</button>
                 }
@@ -78,8 +80,6 @@ function Issue (props){
                 <div key={issue.length + 1} className='issue-container'>
                     <h3 className='issue-title'>{issue.name}</h3>
                     <p>{issue.description}</p>
-
-                    {/* Esto del user.name no funciona */}
                     <User name={(props.user).name} size={"small"}/>
 
                 </div>)}

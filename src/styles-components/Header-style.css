@@ -1,3 +1,8 @@
+form{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 .main-header{
     align-content: center;
     width: 100vw;
@@ -10,6 +15,23 @@ gap: 1rem;
 position: absolute;
 top: 15px;
 left: 50px;
+}
+.input-user{
+    padding:0.5rem;
+    line-height: 0.4;
+    background-color: #f9f9f9;
+    border: 1px solid #e5e5e5;
+    border-top-left-radius: 5%;
+    width: 80%;
+}
+.add-user{
+    padding: 0.56rem;
+    width: 50%;
+    align-self: center;
+    color: white;
+    background-color: var(--orange-red);
+    border-top-right-radius: 5%;
+    border: none;
 }
 .header-title{
     display: flex;
@@ -27,9 +49,12 @@ left: 50px;
     height: 40px;
 }
 .user-box{
-    width: 70px;
-    height: 70px;
+    width: 12%;
+    height: 4.5rem;
     border: solid black 1px;
+    text-align: center;
+    align-items: center;
+
 }
 .small-user-box{
     width: 20px;
@@ -38,7 +63,7 @@ left: 50px;
 }
 .all-users{
     display: flex;
-    width: 100%;
+    width: 200%;
     flex-direction: row;
     gap: 2rem;
 }
