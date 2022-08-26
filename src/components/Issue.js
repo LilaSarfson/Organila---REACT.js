@@ -3,6 +3,8 @@ import { useState } from 'react';
 import '../styles-components/TodoBox-style.css'
 import User from "./User"
 
+
+
 function Issue (props){
     const [name, setName]= useState('');
     const [description, setDescription]=useState('');
@@ -28,7 +30,9 @@ function Issue (props){
     const editIssue = (id) =>{
         setActive(true);
         setPosition(id)
-        console.log(position);
+        setName(issue[id].name);
+        setDescription(issue[id].description);
+        console.log(issue[0].name);
     }
     const handleClick=(e)=>{
         e.preventDefault();
@@ -40,6 +44,8 @@ function Issue (props){
         if(newIssue.name  != ''){
         setIssue((issue)=>[...issue, newIssue])
         setActive(false);
+        // setName('');
+        // setDescription('');
         }
         else{
             alert('your issue needs a name')}}
@@ -60,19 +66,19 @@ function Issue (props){
                 <img style={{width:'20px', alignSelf: 'end', padding:'0.5rem'}}
                 src='cross.png' alt='cross' onClick={closeForm}></img>
                 <label for="issue">Issue</label>
-                <input className='issue-input' onChange={getName}
-                 type="text" id="issue" name="newIssue" value={issue ?  issue[position].name : undefined} required/> <br/>
+                <input defaultValue={ issue ? issue[position] : ''} className='issue-input' onChange={getName}
+                 type="text" id="issue" name="newIssue" required/> <br/>
             <div className='descWho-container'>   
                 <section>           
                     <label for="description">Description</label><br/>
-                    <textarea required onChange={getDescription}
+                    <textarea defaultValue={ issue ? issue[position] : ''} onChange={getDescription}
                     rows="6" cols="20"
                     id="issue-description" 
                     name="newIssueDescription"/>
                   </section>
                   <section>
                     <label for="user">who?</label>
-                    <select id="user" name="user">
+                    <select  id="user" name="user">
                         {props.user.map((user) =>
                         <option key={user.id} value=''>{user.name}</option>)
                         }
@@ -92,27 +98,24 @@ function Issue (props){
             <div className="main-issues">
                 { issue.length===0 || active ?
                 ''
-                : issue.length < 0 && active?
-                <p>Hola</p>
-                :
+                : 
                 <button className='add-issue' onClick={() =>{
                     setActive(true)
                 }}>Add a new issue</button>
                 }
-                {issue.map((issue) =>
-                <div key={issue.id} className='issue-container'>
-                    <h3 className='issue-title'>{issue.name}</h3>
-                    <p>{issue.description}</p>
-                    <div>
-                        <img onClick={()=>deleteIssue(issue.id)} style={{width: '7%'}} src='eliminar.png' alt='eliminar'></img>
-                        <img onClick={()=>editIssue(issue.id)} style={{width: '7%'}} src='editar.png' alt='eliminar'></img>
+                    {issue.map((issue) =>
+                    <div key={issue.id} className='issue-container'>
+                        <h3 className='issue-title'>{issue.name}</h3>
+                        <p>{issue.description}</p>
+                        <div>
+                            <img onClick={()=>deleteIssue(issue.id)} style={{width: '7%'}} src='eliminar.png' alt='eliminar'></img>
+                            <img onClick={()=>editIssue(issue.id)} style={{width: '7%'}} src='editar.png' alt='eliminar'></img>
 
-                    </div>
-                    <User name={(props.user).name} size={"small"}/>
-
-                </div>)
-                
-                }
+                        </div>
+                        <User name={(props.user).name} size={"small"}/>
+                    </div>)
+                    }
+              
             </div>
 
             
