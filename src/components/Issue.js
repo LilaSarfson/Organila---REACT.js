@@ -44,8 +44,7 @@ function Issue (props){
         if(newIssue.name  != ''){
         setIssue((issue)=>[...issue, newIssue])
         setActive(false);
-        // setName('');
-        // setDescription('');
+        console.log(props.user)
         }
         else{
             alert('your issue needs a name')}}
@@ -112,7 +111,7 @@ function Issue (props){
                             <img onClick={()=>editIssue(issue.id)} style={{width: '7%'}} src='editar.png' alt='eliminar'></img>
 
                         </div>
-                        <User name={(props.user).name} size={"small"}/>
+                        <User color={props.user[issue.id].color} name={props.user[issue.id].name} size={"small"}/>
                     </div>)
                     }
               
