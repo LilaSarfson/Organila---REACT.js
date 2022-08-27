@@ -65,7 +65,7 @@ function Issue (props){
             </div>
             : active?
             <div className='issue-container-form'>
-                <form className = 'newIssue-form'>
+            <form onSubmit={handleSubmit} className = 'newIssue-form'>
                 <img style={{width:'20px', alignSelf: 'end', padding:'0.5rem'}}
                 src='cross.png' alt='cross' onClick={closeForm}></img>
                 <label for="issue">Issue</label>
@@ -74,7 +74,7 @@ function Issue (props){
             <div className='descWho-container'>   
                 <section>           
                     <label for="description">Description</label><br/>
-                    <textarea defaultValue={ editActive ? issue[position].description : ''} onChange={getDescription}
+                    <textarea defaultValue={ issue ? issue[position] : ''} onChange={getDescription}
                     rows="6" cols="20"
                     id="issue-description" 
                     name="newIssueDescription"/>
@@ -93,7 +93,7 @@ function Issue (props){
                 className='add-issue'
                 value="submit form"
                 type='button' />
-                </form>
+            </form>
             </div>
             :
             ''
