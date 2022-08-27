@@ -11,6 +11,7 @@ function Issue (props){
     const [issue, setIssue]= useState([]);
     const [active, setActive]=useState(false)
     const [position, setPosition]=useState(0);
+    const [editActive, seteditActive]=useState(false);
 
     const getName= (e) =>{
         setName(e.target.value);
@@ -19,6 +20,7 @@ function Issue (props){
         setDescription(e.target.value);
     }
     const closeForm = ()=>{
+        seteditActive(false);
         if(issue.length >= 0){
             setActive(false)
         }
@@ -29,13 +31,15 @@ function Issue (props){
     }
     const editIssue = (id) =>{
         setActive(true);
-        setPosition(id)
-        setName(issue[id].name);
-        setDescription(issue[id].description);
-        console.log(issue[0].name);
+        setPosition(id);
+        seteditActive(true);
+
+        // Algo al setearlo no esta bien
+        //setName(issue[id].name);
+        //setDescription(issue[id].description);
     }
-    const handleClick=(e)=>{
-        e.preventDefault();
+    const handleClick=()=>{
+        seteditActive(false);
         let newIssue = {
             name:name,
             description:description, 
@@ -65,12 +69,12 @@ function Issue (props){
                 <img style={{width:'20px', alignSelf: 'end', padding:'0.5rem'}}
                 src='cross.png' alt='cross' onClick={closeForm}></img>
                 <label for="issue">Issue</label>
-                <input defaultValue={ issue ? issue[position] : ''} className='issue-input' onChange={getName}
+                <input defaultValue={ editActive ? issue[position].name : ''} className='issue-input' onChange={getName}
                  type="text" id="issue" name="newIssue" required/> <br/>
             <div className='descWho-container'>   
                 <section>           
                     <label for="description">Description</label><br/>
-                    <textarea defaultValue={ issue ? issue[position] : ''} onChange={getDescription}
+                    <textarea defaultValue={ editActive ? issue[position].description : ''} onChange={getDescription}
                     rows="6" cols="20"
                     id="issue-description" 
                     name="newIssueDescription"/>
@@ -111,7 +115,7 @@ function Issue (props){
                             <img onClick={()=>editIssue(issue.id)} style={{width: '7%'}} src='editar.png' alt='eliminar'></img>
 
                         </div>
-                        <User color={props.user[issue.id].color} name={props.user[issue.id].name} size={"small"}/>
+                        <User color={props.user[position].color} name={props.user[position].name} size={"small"}/>
                     </div>)
                     }
               
