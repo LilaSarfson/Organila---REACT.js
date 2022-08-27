@@ -17,7 +17,6 @@ function Header ({user, setUser}){
         setName(e.target.value);
     }
     const handleClick= (e)=>{
-        e.preventDefault();
         let newUser =  {
             id: user.length + 1,
             name:name,
@@ -41,7 +40,7 @@ function Header ({user, setUser}){
             <div className="header-users">
                 <h3 style={{margin: 0}}>¿A quién le toca?</h3>
                 <h4 style={{margin: 0}}>Add user</h4>
-                <form>
+                <form onSubmit={(e)=>{e.preventDefault()}}>
                 <br/>
                 <input className="input-user"
                 onChange={handleChange}

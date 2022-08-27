@@ -34,8 +34,11 @@ function Issue (props){
         setDescription(issue[id].description);
         console.log(issue[0].name);
     }
-    const handleClick=(e)=>{
+    const handleSubmit = (e) =>{
         e.preventDefault();
+        handleClick();
+    }
+    const handleClick=(e)=>{
         let newIssue = {
             name:name,
             description:description, 
@@ -61,35 +64,34 @@ function Issue (props){
             </div>
             : active?
             <div className='issue-container-form'>
-                <form className = 'newIssue-form'>
+            <form onSubmit={handleSubmit} className = 'newIssue-form'>
                 <img style={{width:'20px', alignSelf: 'end', padding:'0.5rem'}}
                 src='cross.png' alt='cross' onClick={closeForm}></img>
                 <label for="issue">Issue</label>
                 <input defaultValue={ issue ? issue[position] : ''} className='issue-input' onChange={getName}
                  type="text" id="issue" name="newIssue" required/> <br/>
-            <div className='descWho-container'>   
-                <section>           
-                    <label for="description">Description</label><br/>
-                    <textarea defaultValue={ issue ? issue[position] : ''} onChange={getDescription}
-                    rows="6" cols="20"
-                    id="issue-description" 
-                    name="newIssueDescription"/>
-                  </section>
-                  <section>
-                    <label for="user">who?</label>
-                    <select  id="user" name="user">
-                        {props.user.map((user) =>
-                        <option key={user.id} value=''>{user.name}</option>)
-                        }
-                    </select>
-                </section>
-            </div>
-    
+                <div className='descWho-container'>   
+                    <section>           
+                        <label for="description">Description</label><br/>
+                        <textarea defaultValue={ issue ? issue[position] : ''} onChange={getDescription}
+                        rows="6" cols="20"
+                        id="issue-description" 
+                        name="newIssueDescription"/>
+                    </section>
+                    <section>
+                        <label for="user">who?</label>
+                        <select  id="user" name="user">
+                            {props.user.map((user) =>
+                            <option key={user.id} value=''>{user.name}</option>)
+                            }
+                        </select>
+                    </section>
+                </div>
                 <input onClick={handleClick}
                 className='add-issue'
                 value="submit form"
                 type='button' />
-                </form>
+            </form>
             </div>
             :
             ''
