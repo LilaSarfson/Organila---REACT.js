@@ -33,17 +33,18 @@ function Issue (props){
         setActive(true);
         setPosition(id);
         seteditActive(true);
-
-        // Algo al setearlo no esta bien
-        //setName(issue[id].name);
-        //setDescription(issue[id].description);
+        if(!active){
+        deleteIssue(id);}
+        else if (closeForm())
+        {return}
     }
     const handleClick=()=>{
         seteditActive(false);
         let newIssue = {
-            name:name,
+            nameOfIssue:name,
             description:description, 
             id:issue.length
+
         }
         if(newIssue.name  != ''){
         setIssue((issue)=>[...issue, newIssue])
@@ -65,25 +66,25 @@ function Issue (props){
             </div>
             : active?
             <div className='issue-container-form'>
-            <form onSubmit={handleSubmit} className = 'newIssue-form'>
+            <form onSubmit={(e)=>{e.preventDefault()}} className = 'newIssue-form'>
                 <img style={{width:'20px', alignSelf: 'end', padding:'0.5rem'}}
                 src='cross.png' alt='cross' onClick={closeForm}></img>
                 <label for="issue">Issue</label>
-                <input defaultValue={ editActive ? issue[position].name : ''} className='issue-input' onChange={getName}
+                <input defaultValue={ editActive ? issue[position] : ''} className='issue-input' onChange={getName}
                  type="text" id="issue" name="newIssue" required/> <br/>
             <div className='descWho-container'>   
                 <section>           
                     <label for="description">Description</label><br/>
-                    <textarea defaultValue={ issue ? issue[position] : ''} onChange={getDescription}
+                    <textarea defaultValue={ editActive ? issue[position] : ''} onChange={getDescription}
                     rows="6" cols="20"
                     id="issue-description" 
                     name="newIssueDescription"/>
                   </section>
                   <section>
                     <label for="user">who?</label>
-                    <select  id="user" name="user">
+                    <select id="user" name="user">
                         {props.user.map((user) =>
-                        <option key={user.id} value=''>{user.name}</option>)
+                        <option key={user.id} color={user.color} defaultValue={editActive ? user.user: ''} >{user.name}</option>)
                         }
                     </select>
                 </section>
@@ -108,14 +109,15 @@ function Issue (props){
                 }
                     {issue.map((issue) =>
                     <div key={issue.id} className='issue-container'>
-                        <h3 className='issue-title'>{issue.name}</h3>
+                        <h3 className='issue-title'>{issue.nameOfIssue}</h3>
                         <p>{issue.description}</p>
                         <div>
                             <img onClick={()=>deleteIssue(issue.id)} style={{width: '7%'}} src='eliminar.png' alt='eliminar'></img>
                             <img onClick={()=>editIssue(issue.id)} style={{width: '7%'}} src='editar.png' alt='eliminar'></img>
 
                         </div>
-                        <User color={props.user[position].color} name={props.user[position].name} size={"small"}/>
+                        {/* Es algo asi pero aun no consigo de sacarlo */}
+                        <User color={props.user[props.user.id[1]].color} name={props.user[props.user.id[1]].name} size={"small"}/>
                     </div>)
                     }
               
