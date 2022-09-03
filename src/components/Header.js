@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import "../styles-components/Header-style.css"
 import User from "./User"
 function Header ({user, setUser}){
     const [name, setName]=useState('');
     const [color, setColor]=useState('');
+    const [index, setIndex]=useState('');
     const createBackground = ()=>{
         let randoNumber= getRandomInt(3);
-        console.log(randoNumber)
         let colorsArray = ["#FCF8E8","#94B49F","#DF7861","#76549A"];
         setColor(colorsArray[randoNumber]);
     }
@@ -17,15 +17,19 @@ function Header ({user, setUser}){
         setName(e.target.value);
     }
     const handleClick= (e)=>{
+        console.log('index=' + user.index)
         let newUser =  {
-            id: user.length + 1,
             name:name,
-            color:color
+            color:color,
+            id:''
            }
            if(name!=='' && user.length !== 4){
         setUser((user)=> [...user, newUser])
             }
             createBackground();
+    }
+    const getIndexUser = (index)=> {
+        setIndex(index)
     }
     return(
         <div className="main-header">
@@ -51,7 +55,10 @@ function Header ({user, setUser}){
                 type='button' />
                 </form>
                 <div className="all-users">
-                    {user.map((usuario) =>  <User color={usuario.color} key={usuario.id} size={"normal"} name={usuario.name} id={usuario.id}/>)}
+                    {/* Necesito setear el index del user para pasarselo después cuando se ejecute en issue */}
+
+                    {user.map((usuario, index) =>
+                    <User color={usuario.color} key={index} size={"normal"} name={usuario.name} id={index}/>)}
                 </div>
             </div>
 
