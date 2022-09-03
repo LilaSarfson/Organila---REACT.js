@@ -12,6 +12,7 @@ function Issue (props){
     const [issue, setIssue]= useState([]);
     const [index, setIndex]= useState('');
     const [active, setActive]=useState(false);
+    const [editActive, seteditActive]=useState(false);
     const unique_id = uuid();
     const getName= (e) =>{
         setName(e.target.value);
@@ -31,21 +32,20 @@ function Issue (props){
     }
     const editIssue = (id, index) =>{
         setActive(true);
-        deleteIssue(id)
+        seteditActive(true);
         setIndex(index);
+        deleteIssue(id);
         console.log('position= ' + index)
-        // setName(issue[id].name);
-        // setDescription(issue[id].description);
         console.log('position.name=' + issue[index].name);
     }
     const handleClick=()=>{
         seteditActive(false);
         let newIssue = {
-            nameOfIssue:name,
+            name:name,
             description:description, 
             id:unique_id
         }
-        if(newIssue.name  != ''){
+        if(newIssue.name  !== ''){
         setIssue((issue)=>[...issue, newIssue])
         setActive(false);
         console.log('props.user= ' + props.user[0].name)
@@ -69,12 +69,12 @@ function Issue (props){
                 <img style={{width:'20px', alignSelf: 'end', padding:'0.5rem'}}
                 src='cross.png' alt='cross' onClick={closeForm}></img>
                 <label for="issue">Issue</label>
-                <input defaultValue={ issue[index] ? issue[index].name : ''} className='issue-input' onChange={getName}
+                <input defaultValue={ editActive ? issue[index].name : ''} className='issue-input' onChange={getName}
                  type="text" id="issue" name="newIssue" required/> <br/>
                 <div className='descWho-container'>   
                     <section>           
                         <label Htmlfor="description">Description</label><br/>
-                        <textarea defaultValue={ issue[index] ? issue[index].description : ''} onChange={getDescription}
+                        <textarea defaultValue={ editActive ? issue[index].description : ''} onChange={getDescription}
                         rows="6" cols="20"
                         id="issue-description" 
                         name="newIssueDescription"/>
@@ -83,7 +83,7 @@ function Issue (props){
                         <label Htmlfor="user">who?</label>
                         <select  id="user" name="user">
                             {props.user.map((user, index) =>
-                            <option key={index} value=''>{user.name}</option>)
+                            <option key={index} defaultValue={editActive ? user.user: ''}>{user.name}</option>)
                             }
                         </select>
                     </section>
@@ -114,7 +114,7 @@ function Issue (props){
                             <img onClick={()=>editIssue(issue.id,  index)} style={{width: '7%'}} src='editar.png' alt='eliminar'></img>
 
                         </div>
-                        <User color={props.user[props.key].color} name={props.user[props.key].name} size={"small"}/>
+                        {/* <User color={props.user[props.key].color} name={props.user[props.key].name} size={"small"}/> */}
                     </div>)
                     }
               
