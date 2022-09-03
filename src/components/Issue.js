@@ -20,6 +20,7 @@ function Issue (props){
         setDescription(e.target.value);
     }
     const closeForm = ()=>{
+        seteditActive(false);
         if(issue.length >= 0){
             setActive(false)
         }
@@ -37,13 +38,10 @@ function Issue (props){
         // setDescription(issue[id].description);
         console.log('position.name=' + issue[index].name);
     }
-    const handleSubmit = (e) =>{
-        e.preventDefault();
-        handleClick();
-    }
-    const handleClick=(e)=>{
+    const handleClick=()=>{
+        seteditActive(false);
         let newIssue = {
-            name:name,
+            nameOfIssue:name,
             description:description, 
             id:unique_id
         }
@@ -67,7 +65,7 @@ function Issue (props){
             </div>
             : active?
             <div className='issue-container-form'>
-            <form onSubmit={handleSubmit} className = 'newIssue-form'>
+            <form onSubmit={(e)=>{e.preventDefault()}} className = 'newIssue-form'>
                 <img style={{width:'20px', alignSelf: 'end', padding:'0.5rem'}}
                 src='cross.png' alt='cross' onClick={closeForm}></img>
                 <label for="issue">Issue</label>

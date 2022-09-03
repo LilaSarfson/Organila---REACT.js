@@ -15,6 +15,7 @@ function Header ({user, setUser}){
     }
     const handleChange = (e) =>{
         setName(e.target.value);
+        createBackground();
     }
     const handleClick= (e)=>{
         console.log('index=' + user.index)
@@ -26,7 +27,6 @@ function Header ({user, setUser}){
            if(name!=='' && user.length !== 4){
         setUser((user)=> [...user, newUser])
             }
-            createBackground();
     }
     const getIndexUser = (index)=> {
         setIndex(index)
