@@ -36,7 +36,7 @@ function Issue (props){
         setIndex(index);
         deleteIssue(id);
         console.log('position= ' + index)
-        console.log('position.name=' + issue[index].name);
+        console.log(issue[index].name);
     }
     const handleClick=()=>{
         seteditActive(false);
@@ -48,7 +48,7 @@ function Issue (props){
         if(newIssue.name  !== ''){
         setIssue((issue)=>[...issue, newIssue])
         setActive(false);
-        console.log('props.user= ' + props.user[0].name)
+        console.log('props.user= ' + props.user[0])
         }
         else{
             alert('your issue needs a name')}}
@@ -68,13 +68,14 @@ function Issue (props){
             <form onSubmit={(e)=>{e.preventDefault()}} className = 'newIssue-form'>
                 <img style={{width:'20px', alignSelf: 'end', padding:'0.5rem'}}
                 src='cross.png' alt='cross' onClick={closeForm}></img>
-                <label for="issue">Issue</label>
-                <input defaultValue={ editActive ? issue[index].name : ''} className='issue-input' onChange={getName}
+                <label Htmlfor="issue">Issue</label>
+                {/* Aquí hay un problema con el .name,  y no se cómo arreglarlo */}
+                <input defaultValue={ editActive ? ({issue}[{index}].name) : ''} className='issue-input' onChange={getName}
                  type="text" id="issue" name="newIssue" required/> <br/>
                 <div className='descWho-container'>   
                     <section>           
                         <label Htmlfor="description">Description</label><br/>
-                        <textarea defaultValue={ editActive ? issue[index].description : ''} onChange={getDescription}
+                        <textarea defaultValue={ editActive ? 'description' : ''} onChange={getDescription}
                         rows="6" cols="20"
                         id="issue-description" 
                         name="newIssueDescription"/>
