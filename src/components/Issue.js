@@ -124,7 +124,8 @@ function Issue (props){
                             <img onClick={()=>editIssue(issue.id,  index)} style={{width: '7%'}} src='editar.png' alt='eliminar'></img>
 
                         </div>
-                        {/* <User color={props.user[props.key].color} name={props.user[props.key].name} size={"small"}/> */}
+                        {/* Necesito decirle que un usuario puede estar en mas de una Issue */}
+                        <User color={props.user[index].color} name={props.user[index].name} size={"small"}/>
                     </div>)
                     }
               

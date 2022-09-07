@@ -4,7 +4,6 @@ import User from "./User"
 function Header ({user, setUser}){
     const [name, setName]=useState('');
     const [color, setColor]=useState('');
-    const [index, setIndex]=useState('');
     const createBackground = ()=>{
         let randoNumber= getRandomInt(3);
         let colorsArray = ["#FCF8E8","#94B49F","#DF7861","#76549A"];
@@ -27,9 +26,6 @@ function Header ({user, setUser}){
            if(name!=='' && user.length !== 4){
         setUser((user)=> [...user, newUser])
             }
-    }
-    const getIndexUser = (index)=> {
-        setIndex(index)
     }
     return(
         <div className="main-header">
@@ -55,7 +51,6 @@ function Header ({user, setUser}){
                 type='button' />
                 </form>
                 <div className="all-users">
-                    {/* Necesito setear el index del user para pasarselo después cuando se ejecute en issue */}
 
                     {user.map((usuario, index) =>
                     <User color={usuario.color} key={index} size={"normal"} name={usuario.name} id={index}/>)}
