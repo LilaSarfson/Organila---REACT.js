@@ -43,7 +43,7 @@ function Issue (props){
         if(!editActive){
             let newIssue = {
                 name:name,
-                description:description, 
+                description:description,
                 id:unique_id
             }
             if(newIssue.name  !== ''){
@@ -56,8 +56,10 @@ function Issue (props){
                 alert('your issue needs a name')}
         }
         else{
-            setIdIssue(issue[indexIssue]
-            .name =name)
+            setIdIssue(issue[indexIssue].name =name, issue[indexIssue]
+                .description =description, issue[indexIssue],
+                )
+                // Creo que aquí tengo que añadir un user dentro de issue
             seteditActive(false)
         }
         setActive(false);
@@ -119,12 +121,12 @@ function Issue (props){
                     <div key={index} className='issue-container'>
                         <h3 className='issue-title'>{issue.name}</h3>
                         <p>{issue.description}</p>
-                        <div>
+                        <div className='issue-icons'>
                             <img onClick={()=>deleteIssue(issue.id)} style={{width: '7%'}} src='eliminar.png' alt='eliminar'></img>
                             <img onClick={()=>editIssue(issue.id,  index)} style={{width: '7%'}} src='editar.png' alt='eliminar'></img>
-
+                            <img onClick={()=>props.moveIssue} style={{width: '7%'}} src='arrow-right.png' alt='mover' ></img>
                         </div>
-                        {/* Necesito decirle que un usuario puede estar en mas de una Issue */}
+                        {/* Necesito decirle que un usuario puede estar en más de una Issue */}
                         <User color={props.user[index].color} name={props.user[index].name} size={"small"}/>
                     </div>)
                     }
