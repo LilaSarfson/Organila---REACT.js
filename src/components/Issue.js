@@ -10,9 +10,10 @@ function Issue (props){
     const [name, setName]= useState('');
     const [description, setDescription]=useState('');
     const [issue, setIssue]= useState([]);
-    const [index, setIndex]= useState('');
+    const [indexIssue, setIndex]= useState('');
     const [active, setActive]=useState(false);
     const [editActive, seteditActive]=useState(false);
+    const [idIssue,setIdIssue]= useState('');
     const unique_id = uuid();
     const getName= (e) =>{
         setName(e.target.value);
@@ -31,27 +32,36 @@ function Issue (props){
        setIssue(newIssuesArray);
     }
     const editIssue = (id, index) =>{
+        setIdIssue(id)
         setActive(true);
         seteditActive(true);
         setIndex(index);
-        deleteIssue(id);
-        console.log('position= ' + index)
-        console.log(issue[index].name);
+        console.log(idIssue)
+        console.log('id del la issue es:' + issue[index].id);
     }
     const handleClick=()=>{
-        seteditActive(false);
-        let newIssue = {
-            name:name,
-            description:description, 
-            id:unique_id
-        }
-        if(newIssue.name  !== ''){
-        setIssue((issue)=>[...issue, newIssue])
-        setActive(false);
-        console.log('props.user= ' + props.user[0])
+        if(!editActive){
+            let newIssue = {
+                name:name,
+                description:description, 
+                id:unique_id
+            }
+            if(newIssue.name  !== ''){
+            setIssue((issue)=>[...issue, newIssue])
+            setActive(false)
+
+            console.log('props.user= ' + props.user[0])
+            }
+            else{
+                alert('your issue needs a name')}
         }
         else{
-            alert('your issue needs a name')}}
+            setIdIssue(issue[indexIssue]
+            .name =name)
+            seteditActive(false)
+        }
+        setActive(false);
+    }
     return(
         <div>
             {
@@ -69,13 +79,12 @@ function Issue (props){
                 <img style={{width:'20px', alignSelf: 'end', padding:'0.5rem'}}
                 src='cross.png' alt='cross' onClick={closeForm}></img>
                 <label Htmlfor="issue">Issue</label>
-                {/* Aquí hay un problema con el .name,  y no se cómo arreglarlo */}
-                <input defaultValue={ editActive ? ({issue}[{index}].name) : ''} className='issue-input' onChange={getName}
+                <input defaultValue={ editActive ? (issue[indexIssue].name) : ''} className='issue-input' onChange={getName}
                  type="text" id="issue" name="newIssue" required/> <br/>
                 <div className='descWho-container'>   
                     <section>           
                         <label Htmlfor="description">Description</label><br/>
-                        <textarea defaultValue={ editActive ? 'description' : ''} onChange={getDescription}
+                        <textarea defaultValue={ editActive ? (issue[indexIssue].description) : ''} onChange={getDescription}
                         rows="6" cols="20"
                         id="issue-description" 
                         name="newIssueDescription"/>
