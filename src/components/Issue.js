@@ -6,10 +6,9 @@ import User from "./User"
 
 
 
-function Issue (props){
+function Issue (props, {statusIssue, setStatus, issue, setIssue}){
     const [name, setName]= useState('');
     const [description, setDescription]=useState('');
-    const [issue, setIssue]= useState([]);
     const [indexIssue, setIndex]= useState('');
     const [active, setActive]=useState(false);
     const [editActive, seteditActive]=useState(false);
@@ -44,7 +43,8 @@ function Issue (props){
             let newIssue = {
                 name:name,
                 description:description,
-                id:unique_id
+                id:unique_id,
+                status:statusIssue
             }
             if(newIssue.name  !== ''){
             setIssue((issue)=>[...issue, newIssue])
@@ -124,7 +124,7 @@ function Issue (props){
                         <div className='issue-icons'>
                             <img onClick={()=>deleteIssue(issue.id)} style={{width: '7%'}} src='eliminar.png' alt='eliminar'></img>
                             <img onClick={()=>editIssue(issue.id,  index)} style={{width: '7%'}} src='editar.png' alt='eliminar'></img>
-                            <img onClick={()=>props.moveIssue} style={{width: '7%'}} src='arrow-right.png' alt='mover' ></img>
+                            <img onClick={props.moveIssue} style={{width: '7%'}} src='arrow-right.png' alt='mover' ></img>
                         </div>
                         {/* Necesito decirle que un usuario puede estar en más de una Issue */}
                         <User color={props.user[index].color} name={props.user[index].name} size={"small"}/>
