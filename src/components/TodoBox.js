@@ -4,38 +4,28 @@ import { useState } from 'react';
 import Issue from './Issue'
 
 function TodoBox(props){
-    const [statusIssue, setStatus]=useState(1);
-    const [issue, setIssue]= useState([]);
-    let toDoArray=[];
-    let inProgressArray=[];
-    let doneArray=[];
+    const [statusIssue, setStatus]=useState(0);
+    const [inProgress, setinProgress]=useState([])
+    const [issueProp,setIssueProp]=useState([])
     const moveIssue = (e) =>{
-        setStatus(statusIssue + 1);
-        if(issue.setStatus===0){
-            issue.push(toDoArray)
-        }
-        else if (issue.statusIssue===1){
-            issue.push(inProgressArray);
-        }
-        else if(issue.statusIssue===2){
-            issue.push(doneArray)
-        }
-        else{
-            return;
-        }
-        console.log(inProgressArray)
+        if (e.target.alt === 'cambiarZona'){
+        setStatus(statusIssue + 1)
+        console.log(issueProp)
+        ;}
+        else{console.log('no entrop')}
     }
     return (
         <div className='box-container'>
            <div className='box toDo'>
             <h2>To Do</h2>
             <Issue
+            issueProp={issueProp}
+            setIssuePro={setIssueProp}
+            inProgress={inProgress}
+            setinProgress={setinProgress}
+            statusIssue={statusIssue}
              user={props.user} 
              moveIssue={(e)=> moveIssue(e)}
-             statusIssue={statusIssue}
-             setStatusIssue={setStatus}
-             issue={issue}
-             setIssue={setIssue}
              />
             </div>
            <div className='box'><h2>In progress</h2></div>

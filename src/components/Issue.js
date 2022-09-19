@@ -6,7 +6,8 @@ import User from "./User"
 
 
 
-function Issue (props, {statusIssue, setStatus, issue, setIssue}){
+function Issue (props, {inProgress, setinProgress},{issueProp, setIssueProp}){
+    const [issue, setIssue]= useState([]);
     const [name, setName]= useState('');
     const [description, setDescription]=useState('');
     const [indexIssue, setIndex]= useState('');
@@ -44,13 +45,13 @@ function Issue (props, {statusIssue, setStatus, issue, setIssue}){
                 name:name,
                 description:description,
                 id:unique_id,
-                status:statusIssue
+                status: props.statusIssue,
             }
-            if(newIssue.name  !== ''){
-            setIssue((issue)=>[...issue, newIssue])
+            if(newIssue.name  !== '' ){
+            setIssue((issue)=>[...issue, newIssue]);
             setActive(false)
-
-            console.log('props.user= ' + props.user[0])
+            // No setea estoo 
+            setIssueProp((issueProp)=>[...issueProp, newIssue]);
             }
             else{
                 alert('your issue needs a name')}
@@ -118,13 +119,13 @@ function Issue (props, {statusIssue, setStatus, issue, setIssue}){
                 }}>Add a new issue</button>
                 }
                     {issue.map((issue, index) =>
-                    <div key={index} className='issue-container'>
+                    <div onClick={props.moveIssue} key={index} className='issue-container'>
                         <h3 className='issue-title'>{issue.name}</h3>
                         <p>{issue.description}</p>
                         <div className='issue-icons'>
                             <img onClick={()=>deleteIssue(issue.id)} style={{width: '7%'}} src='eliminar.png' alt='eliminar'></img>
                             <img onClick={()=>editIssue(issue.id,  index)} style={{width: '7%'}} src='editar.png' alt='eliminar'></img>
-                            <img onClick={props.moveIssue} style={{width: '7%'}} src='arrow-right.png' alt='mover' ></img>
+                            <img style={{width: '7%'}} src='arrow-right.png' alt='cambiarZona' ></img>
                         </div>
                         {/* Necesito decirle que un usuario puede estar en más de una Issue */}
                         <User color={props.user[index].color} name={props.user[index].name} size={"small"}/>
